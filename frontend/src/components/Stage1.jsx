@@ -11,7 +11,13 @@ export default function Stage1({ responses }) {
 
   return (
     <div className="stage stage1">
-      <h3 className="stage-title">Stage 1: Individual Responses</h3>
+      <div className="stage-heading">
+        <span className="stage-pill stage-pill--one">Stage 1</span>
+        <div>
+          <h3>Individual testimony</h3>
+          <p>Each juror shares an unfiltered first impression.</p>
+        </div>
+      </div>
 
       <div className="tabs">
         {responses.map((resp, index) => (

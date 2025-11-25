@@ -8,7 +8,13 @@ export default function Stage3({ finalResponse }) {
 
   return (
     <div className="stage stage3">
-      <h3 className="stage-title">Stage 3: Final Council Answer</h3>
+      <div className="stage-heading">
+        <span className="stage-pill stage-pill--three">Stage 3</span>
+        <div>
+          <h3>Final verdict</h3>
+          <p>The presiding chairman synthesizes the debate into a unified answer.</p>
+        </div>
+      </div>
       <div className="final-response">
         <div className="chairman-label">
           Chairman: {finalResponse.model.split('/')[1] || finalResponse.model}

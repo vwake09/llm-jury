@@ -23,7 +23,13 @@ export default function Stage2({ rankings, labelToModel, aggregateRankings }) {
 
   return (
     <div className="stage stage2">
-      <h3 className="stage-title">Stage 2: Peer Rankings</h3>
+      <div className="stage-heading">
+        <span className="stage-pill stage-pill--two">Stage 2</span>
+        <div>
+          <h3>Cross-exam & peer review</h3>
+          <p>Jurors anonymously critique every response before we reveal who said what.</p>
+        </div>
+      </div>
 
       <h4>Raw Evaluations</h4>
       <p className="stage-description">
