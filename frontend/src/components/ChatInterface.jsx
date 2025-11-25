@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import Stage1 from './Stage1';
 import Stage2 from './Stage2';
 import Stage3 from './Stage3';
+import StageTimeline from './StageTimeline';
+import PromptHelper from './PromptHelper';
 import './ChatInterface.css';
 
 export default function ChatInterface({
@@ -48,6 +50,27 @@ export default function ChatInterface({
     </div>
   );
 
+  const latestAssistantMessage = conversation?.messages
+    ?.slice()
+    .reverse()
+    .find((msg) => msg.role === 'assistant');
+
+  const stageState = ['stage1', 'stage2', 'stage3'].reduce(
+    (acc, key) => {
+      if (!latestAssistantMessage) {
+        acc[key] = 'queued';
+      } else if (latestAssistantMessage.loading?.[key]) {
+        acc[key] = 'running';
+      } else if (latestAssistantMessage[key]) {
+        acc[key] = 'complete';
+      } else {
+        acc[key] = 'queued';
+      }
+      return acc;
+    },
+    {}
+  );
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -71,6 +94,19 @@ export default function ChatInterface({
     }
   };
 
+  const handleTemplateSelect = (template) => {
+    setInput(template);
+  };
+
+  const handleSnippetAppend = (snippet) => {
+    setInput((prev) => {
+      if (!prev) {
+        return snippet;
+      }
+      return `${prev.trim()}\n${snippet}`;
+    });
+  };
+
   if (!conversation) {
     return (
       <div className="chat-interface">
@@ -90,6 +126,7 @@ export default function ChatInterface({
   return (
     <div className="chat-interface">
       <HeroPanel />
+      {conversation && <StageTimeline stageState={stageState} />}
       <div className="chat-panel">
         <div className="messages-container">
           {conversation.messages.length === 0 ? (
@@ -143,7 +180,9 @@ export default function ChatInterface({
                           <span>Running Stage 3: Final synthesis...</span>
                         </div>
                       )}
-                      {msg.stage3 && <Stage3 finalResponse={msg.stage3} />}
+                      {msg.stage3 && (
+                        <Stage3 finalResponse={msg.stage3} metadata={msg.metadata} />
+                      )}
                     </div>
                   </div>
                 )}
@@ -160,28 +199,33 @@ export default function ChatInterface({
 
           <div ref={messagesEndRef} />
         </div>
-
-        {conversation.messages.length === 0 && (
+      </div>
+      {conversation && (
+        <div className="composer">
+          <PromptHelper
+            onTemplateSelect={handleTemplateSelect}
+            onSnippetAppend={handleSnippetAppend}
+          />
           <form className="input-form" onSubmit={handleSubmit}>
             <textarea
               className="message-input"
-              placeholder="Ask your question... (Shift+Enter for new line, Enter to send)"
+              placeholder="Drop your case file... (Shift+Enter for new line, Enter to send)"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
-              rows={3}
+              rows={4}
             />
             <button
               type="submit"
               className="send-button"
               disabled={!input.trim() || isLoading}
             >
-              Send
+              Send to jury
             </button>
           </form>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
