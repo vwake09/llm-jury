@@ -104,6 +104,10 @@ export default function Sidebar({
         <p>💡 Pro tip: The jury thrives on oddly specific cases.</p>
         <p className="tip-subtext">Add context, evidence, or wild hypotheticals.</p>
       </div>
+
+      <div className="sidebar-footer">
+        Built with <span role="img" aria-label="love">❤️</span> by Vivek
+      </div>
     </div>
   );
 }
