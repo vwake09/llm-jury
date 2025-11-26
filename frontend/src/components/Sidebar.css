@@ -236,17 +236,6 @@
   margin-top: 6px;
 }
 
-.sidebar-footer {
-  margin-top: auto;
-  padding-top: 16px;
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(148, 163, 184, 0.7);
-  text-align: center;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
-}
-
 @media (max-width: 1024px) {
   .sidebar {
     width: 100%;
