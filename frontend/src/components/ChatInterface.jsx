@@ -16,7 +16,7 @@ export default function ChatInterface({
   const messagesEndRef = useRef(null);
 
   const heroStats = [
-    { label: 'Jurors on duty', value: '4', detail: 'GPT · Gemini · Claude · Grok' },
+    { label: 'Jurors on duty', value: '4', detail: 'GPT · Gemini · Claude · Grok 4.1' },
     { label: 'Acts per case', value: '3', detail: 'Testimony • Review • Verdict' },
     { label: 'Response style', value: 'Live', detail: 'Streaming updates in-sequence' },
   ];

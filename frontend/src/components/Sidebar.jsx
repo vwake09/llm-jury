@@ -4,7 +4,7 @@ const jurorsOnDuty = [
   { emoji: '🧠', name: 'GPT-5.1', role: 'Strategist' },
   { emoji: '✨', name: 'Gemini 3 Pro', role: 'Visionary' },
   { emoji: '🕊️', name: 'Claude Sonnet 4.5', role: 'Diplomat' },
-  { emoji: '⚡', name: 'Grok 4', role: 'Wildcard' },
+  { emoji: '⚡', name: 'Grok 4.1', role: 'Wildcard' },
 ];
 
 export default function Sidebar({
